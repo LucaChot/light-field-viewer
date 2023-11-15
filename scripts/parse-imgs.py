@@ -27,9 +27,10 @@ for filename in os.listdir(folder_path):
         })
 
 # Create a JSON file with the image information
-json_file_path = '../imgs/imgs.json'
-with open(json_file_path, 'w') as json_file:
-    json.dump(image_info_list, json_file, indent=2)
+js_file_path = '../imgs/imgs.js'
+with open(js_file_path, 'w') as js_file:
+    js_file.write("export const data = ")
+    js_file.write(json.dumps(image_info_list, indent=2))
 
-print(f'JSON file created: {json_file_path}')
+print(f'JSON file created: {js_file_path}')
 
