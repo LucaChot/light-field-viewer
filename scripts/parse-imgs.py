@@ -2,7 +2,7 @@ import os
 import json
 
 # Specify the folder path containing the images
-folder_path = '../imgs'
+folder_path = './imgs'
 
 # Function to extract u and v from the image filename
 def extract_u_v(filename):
@@ -21,13 +21,13 @@ for filename in os.listdir(folder_path):
 
         # Add information to the list
         image_info_list.append({
-            "src": file_name,
+            "src": "../imgs/" + file_name,
             "u": u,
             "v": v
         })
 
 # Create a JSON file with the image information
-js_file_path = '../imgs/imgs.js'
+js_file_path = './src/imgs.js'
 with open(js_file_path, 'w') as js_file:
     js_file.write("export const data = ")
     js_file.write(json.dumps(image_info_list, indent=2))

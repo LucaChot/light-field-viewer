@@ -3,6 +3,10 @@ import "./App.css";
 import Scene from "./Scene";
 
 const App = () => {
+
+
+
+
   return (
     <>
       <Scene />

@@ -5,12 +5,14 @@ import { shaderMaterial } from "@react-three/drei";
 import glsl from "babel-plugin-glsl/macro";
 import "./App.css";
 import textureImg from "./img.png"
+import { data } from "./imgs"
 
-const WaveShaderMaterial = shaderMaterial(
+const WaveShaderMaterial = (textures) =>  {
+  return shaderMaterial(
   // Uniform
   {
     uTime: 0,
-    uTexture: new THREE.Texture(),
+    uTexture: { value : textures},
   },
   // Vertex Shader
   glsl`
@@ -35,8 +37,8 @@ const WaveShaderMaterial = shaderMaterial(
       vec3 texture = texture2D(uTexture, vUv).rgb;
       gl_FragColor = vec4(texture, 1.0); 
     }
-  `
-);
+  `);
+}
 
 extend({ WaveShaderMaterial });
 
@@ -51,9 +53,10 @@ const Screen = () => {
     // Make the plane look at the camera
     planeRef.current.lookAt(camera.position);
   });
-  const [image] = useLoader(THREE.TextureLoader, [
-    textureImg
-  ]);
+
+  const filenames = data.map(item => item.src);
+  
+  const image = useLoader(THREE.TextureLoader, filenames.slice(0,4));
 
   return (
     <mesh ref={planeRef}>
